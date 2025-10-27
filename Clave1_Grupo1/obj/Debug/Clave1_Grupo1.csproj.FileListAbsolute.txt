@@ -1,0 +1,12 @@
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\bin\Debug\Clave1_Grupo1.exe.config
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\bin\Debug\Clave1_Grupo1.exe
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\bin\Debug\Clave1_Grupo1.pdb
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.csproj.AssemblyReference.cache
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.Form1.resources
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.Properties.Resources.resources
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.csproj.GenerateResource.cache
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.csproj.CoreCompileInputs.cache
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.exe
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.pdb
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.exe.config
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.Form2.resources
