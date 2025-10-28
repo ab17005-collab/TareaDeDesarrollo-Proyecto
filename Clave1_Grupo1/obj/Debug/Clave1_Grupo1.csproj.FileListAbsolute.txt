@@ -10,3 +10,4 @@ C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones
 C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.pdb
 C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.exe.config
 C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.Form2.resources
+C:\Users\jaime\OneDrive\Documentos\UES\2025\Ciclo II\Programacion I\Evaluaciones\Proyecto\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.Form3.resources

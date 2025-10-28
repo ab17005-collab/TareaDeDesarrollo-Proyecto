@@ -19,6 +19,7 @@ namespace Clave1_Grupo1
 
         // Definir varables globales
         List<List<dynamic>> usuarios = new List<List<dynamic>>();
+        List<dynamic> usuario = new List<dynamic>();
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -50,9 +51,10 @@ namespace Clave1_Grupo1
                     usuario[7].ToString().ToLower() == entrada)
                 {
                     usuarioEncontrado = true;
+                    this.usuario = usuario;
                     lblUsuarioNoEncontrado.Visible = false;
                     // Mostrar datos del usuario encontrado
-                    MessageBox.Show(
+                    /*MessageBox.Show(
                         $"Usuario encontrado:\n\n" +
                                         $"ID: {usuario[0]}\n" +
                                         $"Nombre: {usuario[1]} {usuario[2]}\n" +
@@ -61,7 +63,27 @@ namespace Clave1_Grupo1
                                         $"Email: {usuario[5]}\n" +
                                         $"Dirección: {usuario[6]}\n" +
                                         $"Código de Cliente: {usuario[7]}"
-                        );
+                        );*/
+
+                    // Confirmar si es el usuario correcto
+                    DialogResult resultado = MessageBox.Show(
+                                        "¿Es el usuario correcto?\n\n"+
+                                        $"ID: {usuario[0]}\n" +
+                                        $"Nombre: {usuario[1]} {usuario[2]}\n" +
+                                        $"Edad: {usuario[3]}\n" +
+                                        $"Teléfono: {usuario[4]}\n" +
+                                        $"Email: {usuario[5]}\n" +
+                                        $"Dirección: {usuario[6]}\n" +
+                                        $"Código de Cliente: {usuario[7]}", 
+                                        "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (resultado == DialogResult.Yes)
+                    {
+                    // Si es el usuario correcto abrir formulario 3
+                    Form3 form3 = new Form3(usuario);
+                    form3.Show();
+                    this.Hide();
+                    }
                 }
 
                 // Si no se encuentra el usuario
