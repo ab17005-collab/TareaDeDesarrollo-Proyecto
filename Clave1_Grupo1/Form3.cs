@@ -23,7 +23,7 @@ namespace Clave1_Grupo1
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            /*MessageBox.Show(
                 $"Bienvenido al sistema, {_usuario[1]} {_usuario[2]}!\n\n" +
                 $"ID: {_usuario[0]}\n" +
                 $"Nombre: {_usuario[1]} {_usuario[2]}\n" +
@@ -32,7 +32,7 @@ namespace Clave1_Grupo1
                 $"Email: {_usuario[5]}\n" +
                 $"Dirección: {_usuario[6]}\n" +
                 $"Código de Cliente: {_usuario[7]}"
-            );
+            );*/
 
             // Mostrar el ID en el texto del formulario
             this.Text = $"Cuenta: {_usuario[0]}";
@@ -41,6 +41,35 @@ namespace Clave1_Grupo1
             txtPropietario.Text = $"{_usuario[1]} {_usuario[2]}";
             txtEmail.Text = _usuario[5];
             txtTelefono.Text = _usuario[4];
+
+            // Mostrar las fechas disponibles en negrita en mcCalendarioAgendarCita
+            mcCalendarioAgendarCita.BoldedDates = new DateTime[]
+            {
+                new DateTime(2025, 10, 28),
+                new DateTime(2025 , 10, 29),
+                new DateTime(2025, 10, 30)
+            };
+
+            // Configurar el data gird view
+            dgvSlotsDisponibles.Columns.Add("Time", "Time");
+            dgvSlotsDisponibles.Columns.Add("DrMartinez", "Dr. Martinez");
+            dgvSlotsDisponibles.Columns.Add("DraLopez", "Dra. Lopez");
+
+            for (int hour = 8; hour < 18; hour++)
+            {
+                dgvSlotsDisponibles.Rows.Add($"{hour}:00", "", "");
+                dgvSlotsDisponibles.Rows.Add($"{hour}:30", "", "");
+            }
+
+            // Colorear celdas dinamicamente
+            dgvSlotsDisponibles.Rows[3].Cells[1].Style.BackColor = Color.LightGreen; // available
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+
+
 
         }
     }

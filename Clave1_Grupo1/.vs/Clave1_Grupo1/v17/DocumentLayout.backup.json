@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|c:\\users\\jaime\\onedrive\\documentos\\ues\\2025\\ciclo ii\\programacion i\\evaluaciones\\proyecto\\clave1_grupo1\\form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
@@ -11,20 +15,16 @@
       "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|c:\\users\\jaime\\onedrive\\documentos\\ues\\2025\\ciclo ii\\programacion i\\evaluaciones\\proyecto\\clave1_grupo1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|c:\\users\\jaime\\onedrive\\documentos\\ues\\2025\\ciclo ii\\programacion i\\evaluaciones\\proyecto\\clave1_grupo1\\form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D354972-6849-42E5-B8BB-70A0AAA95779}|Clave1_Grupo1.csproj|solutionrelative:form2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 160,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -53,50 +53,46 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Form3.cs",
               "DocumentMoniker": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs",
               "RelativeDocumentMoniker": "Form3.cs",
-              "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs",
-              "RelativeToolTip": "Form3.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAADwvyoAAAArAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs*",
+              "RelativeToolTip": "Form3.cs*",
+              "ViewState": "AgIAADMAAAAAAAAAAAAiwEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-28T05:30:42.128Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form3.cs [Design]",
               "DocumentMoniker": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs",
               "RelativeDocumentMoniker": "Form3.cs",
-              "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs [Design]",
-              "RelativeToolTip": "Form3.cs [Design]",
+              "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form3.cs [Design]*",
+              "RelativeToolTip": "Form3.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-28T03:00:36.628Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Form2.cs",
               "DocumentMoniker": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form2.cs",
               "RelativeDocumentMoniker": "Form2.cs",
               "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form2.cs",
               "RelativeToolTip": "Form2.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAIwEUAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAIwEUAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-27T18:59:24.327Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form2.cs [Design]",
               "DocumentMoniker": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form2.cs",
               "RelativeDocumentMoniker": "Form2.cs",
@@ -114,14 +110,14 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowFkAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAA5wFkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-27T07:15:55.714Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\jaime\\OneDrive\\Documentos\\UES\\2025\\Ciclo II\\Programacion I\\Evaluaciones\\Proyecto\\Clave1_Grupo1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
