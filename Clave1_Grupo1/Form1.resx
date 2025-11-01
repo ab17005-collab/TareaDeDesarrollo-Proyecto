@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="erpEmail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAcgAAAIFCAYAAABWP20dAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAA/7JJREFUeF7s/Ye3ZUdxNg7//p/vW7/1LRuUA9iAcgQcX5MURjMaSWCMjY0j+DXG
+        vwAADr8BOAVTJAAA/7JJREFUeF7s/Ye3ZUdxNg7//p/vW7/1LRuUA9iAcgQcX5MURjMaSWCMjY0j+DXG
         ZEmTowISGk1WziAQihMkjTSjnGduzvnce+tbVd3Vu7q6eodzzh0JrDvrmbM7p+p+dnXa/8/4xASMj4/D
         5MQETE1NwczMDMzOzUFrrgWtVgvm5+cJCwsLCovud3HRAc307O2CuTMsemh77S798LO0l/6WEsczLQ0w
         7D7Gx+gUH6ZMI5r25So/6D5vjCVlYwrb67xo9yo/Of/SrO3ZrcxchrJ4rbi0P+1u+culoe0sf9pOu1lx
@@ -2983,7 +2986,4 @@
         35/m5/9Py2ku7hneGQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="erpEmail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

@@ -28,21 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.txtBarraBusqueda = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
+            this.lblUsuarioNoEncontrado = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.chkTodos = new System.Windows.Forms.CheckBox();
-            this.lblUsuarioNoEncontrado = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBarraBusqueda
@@ -77,15 +76,6 @@
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(154, 184);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(33, 32);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -104,9 +94,42 @@
             this.btnCrearUsuario.Name = "btnCrearUsuario";
             this.btnCrearUsuario.Size = new System.Drawing.Size(93, 23);
             this.btnCrearUsuario.TabIndex = 7;
-            this.btnCrearUsuario.Text = "Crear usuario";
+            this.btnCrearUsuario.Text = "Sin usuario";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
             this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
+            // 
+            // lblUsuarioNoEncontrado
+            // 
+            this.lblUsuarioNoEncontrado.AutoSize = true;
+            this.lblUsuarioNoEncontrado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(24)))), ((int)(((byte)(61)))));
+            this.lblUsuarioNoEncontrado.Location = new System.Drawing.Point(229, 219);
+            this.lblUsuarioNoEncontrado.Name = "lblUsuarioNoEncontrado";
+            this.lblUsuarioNoEncontrado.Size = new System.Drawing.Size(308, 13);
+            this.lblUsuarioNoEncontrado.TabIndex = 14;
+            this.lblUsuarioNoEncontrado.Text = "Usuario no encontraco, por favor verifique los datos ingresados.";
+            this.lblUsuarioNoEncontrado.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(304, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Crear usuario";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label3.Location = new System.Drawing.Point(161, 184);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 32);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "🔍";
             // 
             // label2
             // 
@@ -167,22 +190,13 @@
             this.chkTodos.Text = "Todos";
             this.chkTodos.UseVisualStyleBackColor = true;
             // 
-            // lblUsuarioNoEncontrado
-            // 
-            this.lblUsuarioNoEncontrado.AutoSize = true;
-            this.lblUsuarioNoEncontrado.ForeColor = System.Drawing.Color.Red;
-            this.lblUsuarioNoEncontrado.Location = new System.Drawing.Point(229, 219);
-            this.lblUsuarioNoEncontrado.Name = "lblUsuarioNoEncontrado";
-            this.lblUsuarioNoEncontrado.Size = new System.Drawing.Size(308, 13);
-            this.lblUsuarioNoEncontrado.TabIndex = 14;
-            this.lblUsuarioNoEncontrado.Text = "Usuario no encontraco, por favor verifique los datos ingresados.";
-            this.lblUsuarioNoEncontrado.Visible = false;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblUsuarioNoEncontrado);
             this.Controls.Add(this.chkTodos);
             this.Controls.Add(this.checkBox4);
@@ -192,14 +206,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBarraBusqueda);
             this.Name = "Form2";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Form2_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,15 +222,16 @@
         private System.Windows.Forms.TextBox txtBarraBusqueda;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnCrearUsuario;
+        private System.Windows.Forms.Label lblUsuarioNoEncontrado;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox chkTodos;
-        private System.Windows.Forms.Label lblUsuarioNoEncontrado;
     }
 }
