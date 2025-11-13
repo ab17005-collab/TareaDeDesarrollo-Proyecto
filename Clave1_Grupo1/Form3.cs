@@ -72,5 +72,18 @@ namespace Clave1_Grupo1
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota();
+            nuevaMascotaForm.ShowDialog();
+
+        }
+
+        private void btnNuevaMascota_Click(object sender, EventArgs e)
+        {
+            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota();
+            nuevaMascotaForm.ShowDialog();
+        }
     }
 }
