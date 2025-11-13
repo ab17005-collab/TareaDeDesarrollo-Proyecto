@@ -5,14 +5,24 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions; // Incluir libreria para operaciones con expresiones regulares
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions; // Incluir libreria para operaciones con expresiones regulares
+using MySql.Data.MySqlClient; // Incluir libreria para operaciones con MySQL
 
 namespace Clave1_Grupo1
 {
     public partial class Form1 : Form
     {
+        static string servidor = "localhost"; //Nombre o ip del servidor de MySQL
+        static string bd = "veterinariapatitasypelos"; //Nombre de la base de datos
+        static string usuario = "root"; //Usuario de acceso a MySQL
+        static string password = "root"; //Contraseña de usuario de acceso a MySQL
+                                         //Crearemos la cadena de conexión concatenando las variables
+        static string cadenaConexion = "Database=" + bd + "; Data Source=" + servidor +
+        "; User Id=" + usuario + "; Password=" + password + "";
+        //Instancia para conexión a MySQL, recibe la cadena de conexión
+        static MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +30,7 @@ namespace Clave1_Grupo1
 
         // Declaracion de variables globales
         string email = "admin@patitasypelos.com";
-        string password = "admin123";
+        string passwordAdmin = "admin123";
 
         string emailIngresado;
         string passwordIngresado;
@@ -81,7 +91,7 @@ namespace Clave1_Grupo1
             emailIngresado = txtEmail.Text.ToLower().Trim();
             passwordIngresado = txtPassword.Text;
 
-            if (emailIngresado == email && passwordIngresado == password)
+            if (emailIngresado == email && passwordIngresado == passwordAdmin)
             {
                 // Abrir el formulario principal
                 Form2 formularioPrincipal = new Form2();
@@ -94,5 +104,12 @@ namespace Clave1_Grupo1
             }
 
         }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
