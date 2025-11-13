@@ -1,31 +1,22 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace Clave1_Grupo1
 {
     public class Administrador : Usuario
     {
-        public Administrador(string nombreUsuario, string apellidoUsuario, string contrasena, string rol)
-            : base(nombreUsuario, apellidoUsuario, contrasena, rol)
+        public Administrador(string nombre, string apellido, string correo, string contrasena, string telefono, string direccion, string rol)
+            : base(nombre, apellido, correo, contrasena, telefono, direccion, rol)
         {
         }
 
         public void GuardarEnBD(MySqlConnection conexion)
         {
-            // Primero guardamos en la tabla 'usuarios'
             int idUsuario = base.GuardarEnBD(conexion);
 
-            // Luego insertamos en la tabla 'administradores'
-            string query = @"INSERT INTO administradores 
-                             (idUsuario, nombre, apellido, fechaRegistro)
-                             VALUES (@idUsuario, @nombre, @apellido, @fechaRegistro)";
-
+            string query = "INSERT INTO administradores (id_usuario) VALUES (@idUsuario)";
             MySqlCommand cmd = new MySqlCommand(query, conexion);
             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-            cmd.Parameters.AddWithValue("@nombre", NombreUsuario);
-            cmd.Parameters.AddWithValue("@apellido", ApellidoUsuario);
-            cmd.Parameters.AddWithValue("@fechaRegistro", DateTime.Now);
-
             cmd.ExecuteNonQuery();
         }
     }

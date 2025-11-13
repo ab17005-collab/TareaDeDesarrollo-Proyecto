@@ -28,7 +28,6 @@ namespace Clave1_Grupo1
         usuarios.Add(new List<dynamic> { "2205457111", "Maria Fernanda", "Lopez Martinez", "25", "72399079", "NazarOlveraSuarez@superrito.com", "1234 Elm Street, Springfield, IL 62704", "055613057" });
 
         // Configurar layout del formulario
-        chkTodos.Checked = true;
         lblUsuarioNoEncontrado.Visible = false;
         }
 
@@ -81,6 +80,32 @@ namespace Clave1_Grupo1
                     lblUsuarioNoEncontrado.Visible = true;
                 }
             }
+        }
+
+        private void btnUsuarioNuevo_Click(object sender, EventArgs e)
+        {
+            frmCrearUsuario formRegister = new frmCrearUsuario();
+            formRegister.ShowDialog();
+        }
+
+        private void rdbTodos_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbIdCliente_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbTelefono_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbCorreoElectronico_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

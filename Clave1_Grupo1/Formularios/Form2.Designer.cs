@@ -34,14 +34,14 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
             this.lblUsuarioNoEncontrado = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUsuarioNuevo = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.chkTodos = new System.Windows.Forms.CheckBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdbTodos = new System.Windows.Forms.RadioButton();
+            this.rdbIdCliente = new System.Windows.Forms.RadioButton();
+            this.rdbTelefono = new System.Windows.Forms.RadioButton();
+            this.rdbCorreoElectronico = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtBarraBusqueda
@@ -109,15 +109,16 @@
             this.lblUsuarioNoEncontrado.Text = "Usuario no encontraco, por favor verifique los datos ingresados.";
             this.lblUsuarioNoEncontrado.Visible = false;
             // 
-            // button1
+            // btnUsuarioNuevo
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(304, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 23);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Crear usuario";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnUsuarioNuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsuarioNuevo.Location = new System.Drawing.Point(304, 38);
+            this.btnUsuarioNuevo.Name = "btnUsuarioNuevo";
+            this.btnUsuarioNuevo.Size = new System.Drawing.Size(114, 23);
+            this.btnUsuarioNuevo.TabIndex = 15;
+            this.btnUsuarioNuevo.Text = "Usuario Nuevo";
+            this.btnUsuarioNuevo.UseVisualStyleBackColor = true;
+            this.btnUsuarioNuevo.Click += new System.EventHandler(this.btnUsuarioNuevo_Click);
             // 
             // label3
             // 
@@ -140,69 +141,78 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Filtros:";
             // 
-            // checkBox1
+            // radioButton1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(283, 259);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(114, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Numero de cuenta";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(0, 0);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(85, 17);
+            this.radioButton1.TabIndex = 17;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // rdbTodos
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(403, 258);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(89, 17);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Identificacion";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.rdbTodos.AutoSize = true;
+            this.rdbTodos.Location = new System.Drawing.Point(232, 259);
+            this.rdbTodos.Name = "rdbTodos";
+            this.rdbTodos.Size = new System.Drawing.Size(55, 17);
+            this.rdbTodos.TabIndex = 18;
+            this.rdbTodos.TabStop = true;
+            this.rdbTodos.Text = "Todos";
+            this.rdbTodos.UseVisualStyleBackColor = true;
+            this.rdbTodos.CheckedChanged += new System.EventHandler(this.rdbTodos_CheckedChanged);
             // 
-            // checkBox3
+            // rdbIdCliente
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(498, 259);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(68, 17);
-            this.checkBox3.TabIndex = 11;
-            this.checkBox3.Text = "Telefono";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.rdbIdCliente.AutoSize = true;
+            this.rdbIdCliente.Location = new System.Drawing.Point(305, 259);
+            this.rdbIdCliente.Name = "rdbIdCliente";
+            this.rdbIdCliente.Size = new System.Drawing.Size(113, 17);
+            this.rdbIdCliente.TabIndex = 19;
+            this.rdbIdCliente.TabStop = true;
+            this.rdbIdCliente.Text = "Numero de cuenta";
+            this.rdbIdCliente.UseVisualStyleBackColor = true;
+            this.rdbIdCliente.CheckedChanged += new System.EventHandler(this.rdbIdCliente_CheckedChanged);
             // 
-            // checkBox4
+            // rdbTelefono
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(572, 259);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(57, 17);
-            this.checkBox4.TabIndex = 12;
-            this.checkBox4.Text = "Correo";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.rdbTelefono.AutoSize = true;
+            this.rdbTelefono.Location = new System.Drawing.Point(438, 259);
+            this.rdbTelefono.Name = "rdbTelefono";
+            this.rdbTelefono.Size = new System.Drawing.Size(67, 17);
+            this.rdbTelefono.TabIndex = 20;
+            this.rdbTelefono.TabStop = true;
+            this.rdbTelefono.Text = "Teléfono";
+            this.rdbTelefono.UseVisualStyleBackColor = true;
+            this.rdbTelefono.CheckedChanged += new System.EventHandler(this.rdbTelefono_CheckedChanged);
             // 
-            // chkTodos
+            // rdbCorreoElectronico
             // 
-            this.chkTodos.AutoSize = true;
-            this.chkTodos.Location = new System.Drawing.Point(221, 259);
-            this.chkTodos.Name = "chkTodos";
-            this.chkTodos.Size = new System.Drawing.Size(56, 17);
-            this.chkTodos.TabIndex = 13;
-            this.chkTodos.Text = "Todos";
-            this.chkTodos.UseVisualStyleBackColor = true;
+            this.rdbCorreoElectronico.AutoSize = true;
+            this.rdbCorreoElectronico.Location = new System.Drawing.Point(522, 259);
+            this.rdbCorreoElectronico.Name = "rdbCorreoElectronico";
+            this.rdbCorreoElectronico.Size = new System.Drawing.Size(111, 17);
+            this.rdbCorreoElectronico.TabIndex = 21;
+            this.rdbCorreoElectronico.TabStop = true;
+            this.rdbCorreoElectronico.Text = "Correo electronico";
+            this.rdbCorreoElectronico.UseVisualStyleBackColor = true;
+            this.rdbCorreoElectronico.CheckedChanged += new System.EventHandler(this.rdbCorreoElectronico_CheckedChanged);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.rdbCorreoElectronico);
+            this.Controls.Add(this.rdbTelefono);
+            this.Controls.Add(this.rdbIdCliente);
+            this.Controls.Add(this.rdbTodos);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnUsuarioNuevo);
             this.Controls.Add(this.lblUsuarioNoEncontrado);
-            this.Controls.Add(this.chkTodos);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCrearUsuario);
             this.Controls.Add(this.linkLabel1);
@@ -225,13 +235,13 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnCrearUsuario;
         private System.Windows.Forms.Label lblUsuarioNoEncontrado;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUsuarioNuevo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox chkTodos;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdbTodos;
+        private System.Windows.Forms.RadioButton rdbIdCliente;
+        private System.Windows.Forms.RadioButton rdbTelefono;
+        private System.Windows.Forms.RadioButton rdbCorreoElectronico;
     }
 }

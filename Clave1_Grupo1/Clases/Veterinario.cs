@@ -1,5 +1,5 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace Clave1_Grupo1
 {
@@ -7,31 +7,20 @@ namespace Clave1_Grupo1
     {
         public string Especialidad { get; set; }
 
-        public Veterinario(string nombreUsuario, string apellidoUsuario, string contrasena, string rol, string especialidad)
-            : base(nombreUsuario, apellidoUsuario, contrasena, rol)
+        public Veterinario(string nombre, string apellido, string correo, string contrasena, string telefono, string direccion, string rol, string especialidad)
+            : base(nombre, apellido, correo, contrasena, telefono, direccion, rol)
         {
             Especialidad = especialidad;
         }
 
         public void GuardarEnBD(MySqlConnection conexion)
         {
-            // Primero guardamos en la tabla 'usuarios'
             int idUsuario = base.GuardarEnBD(conexion);
 
-            // Ahora insertamos en la tabla 'veterinarios'
-            string query = @"INSERT INTO veterinarios 
-                             (idUsuario, nombre, apellido, especialidad, fechaRegistro)
-                             VALUES (@idUsuario, @nombre, @apellido, @especialidad, @fechaRegistro)";
-
+            string query = "INSERT INTO veterinarios (id_usuario) VALUES (@idUsuario)";
             MySqlCommand cmd = new MySqlCommand(query, conexion);
             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
-            cmd.Parameters.AddWithValue("@nombre", NombreUsuario);
-            cmd.Parameters.AddWithValue("@apellido", ApellidoUsuario);
-            cmd.Parameters.AddWithValue("@especialidad", Especialidad);
-            cmd.Parameters.AddWithValue("@fechaRegistro", DateTime.Now);
-
             cmd.ExecuteNonQuery();
         }
     }
 }
-
