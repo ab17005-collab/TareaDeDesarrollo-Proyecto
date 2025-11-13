@@ -53,17 +53,6 @@ namespace Clave1_Grupo1
                     usuarioEncontrado = true;
                     this.usuario = usuario;
                     lblUsuarioNoEncontrado.Visible = false;
-                    // Mostrar datos del usuario encontrado
-                    /*MessageBox.Show(
-                        $"Usuario encontrado:\n\n" +
-                                        $"ID: {usuario[0]}\n" +
-                                        $"Nombre: {usuario[1]} {usuario[2]}\n" +
-                                        $"Edad: {usuario[3]}\n" +
-                                        $"Teléfono: {usuario[4]}\n" +
-                                        $"Email: {usuario[5]}\n" +
-                                        $"Dirección: {usuario[6]}\n" +
-                                        $"Código de Cliente: {usuario[7]}"
-                        );*/
 
                     // Confirmar si es el usuario correcto
                     DialogResult resultado = MessageBox.Show(
