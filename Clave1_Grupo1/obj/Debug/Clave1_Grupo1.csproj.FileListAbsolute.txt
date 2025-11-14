@@ -38,3 +38,4 @@ C:\Users\eriks\Desktop\Proyecto PRN115\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.csp
 C:\Users\eriks\Desktop\Proyecto PRN115\Clave1_Grupo1\obj\Debug\Clave1_G.B5AD671E.Up2Date
 C:\Users\eriks\Desktop\Proyecto PRN115\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.exe
 C:\Users\eriks\Desktop\Proyecto PRN115\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.pdb
+C:\Users\eriks\Desktop\Proyecto PRN115\Clave1_Grupo1\obj\Debug\Clave1_Grupo1.FormCrearUsuario.resources

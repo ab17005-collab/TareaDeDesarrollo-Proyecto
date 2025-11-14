@@ -7,26 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Clave1_Grupo1
 {
     public partial class Form2 : Form
     {
+        private static string servidor = "localhost";
+        private static string bd = "veterinariapatitasypelos";
+        private static string usuarioDb = "root";
+        private static string passwordDb = "root";
+
+        private static string cadenaConexion =
+            $"Server={servidor};Port=3306;Database={bd};User Id={usuarioDb};Password={passwordDb};" +
+            "SslMode=none;AllowPublicKeyRetrieval=True";
+        private List<dynamic> usuario = new List<dynamic>();
         public Form2()
         {
             InitializeComponent();
         }
-
-        // Definir varables globales
-        List<List<dynamic>> usuarios = new List<List<dynamic>>();
-        List<dynamic> usuario = new List<dynamic>();
-
         private void Form2_Load(object sender, EventArgs e)
         {
-        // Agregar algunos usuarios de ejemplo
-        usuarios.Add(new List<dynamic> { "2205457100", "Jaime Roberto", "Aldana Beltran", "29", "72399078", "ab17005@ues.edu.sv", "4440 Caynor Circle, Rochelle Park, NJ 07662", "055613056" });
-        usuarios.Add(new List<dynamic> { "2205457111", "Maria Fernanda", "Lopez Martinez", "25", "72399079", "NazarOlveraSuarez@superrito.com", "1234 Elm Street, Springfield, IL 62704", "055613057" });
-
         // Configurar layout del formulario
         chkTodos.Checked = true;
         lblUsuarioNoEncontrado.Visible = false;
@@ -34,63 +35,109 @@ namespace Clave1_Grupo1
 
         private void btnCrearUsuario_Click(object sender, EventArgs e)
         {
-            
-        }
+            // ⭐ NUEVO: abrir el formulario para crear usuario
+            using (var frm = new FormCrearUsuario())   // <-- ESTE ES EL NUEVO FORM
+            {
+                var result = frm.ShowDialog();         // lo mostramos como diálogo modal
 
+                if (result == DialogResult.OK)
+                {
+                    MessageBox.Show("Usuario creado correctamente.",
+                        "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // ⭐ OPCIONAL: aquí podrías recargar la lista de usuarios desde la BD
+                    // para que la búsqueda use también el nuevo usuario.
+                }
+            }
+        }        
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            string entrada = txtBarraBusqueda.Text.ToLower().Trim();
+            string entrada = txtBarraBusqueda.Text.Trim();
+            lblUsuarioNoEncontrado.Visible = false;
+
+            if (string.IsNullOrWhiteSpace(entrada))
+            {
+                MessageBox.Show("Ingrese algún dato para buscar (ID, teléfono o correo).",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             bool usuarioEncontrado = false;
 
-            // Encontrar usuario
-            foreach (var usuario in usuarios)
+            try
             {
-                if (usuario[0].ToString().ToLower() == entrada ||
-                    usuario[4].ToString().ToLower() == entrada ||
-                    usuario[5].ToString().ToLower() == entrada ||
-                    usuario[7].ToString().ToLower() == entrada)
+                using (var cn = new MySqlConnection(cadenaConexion))
                 {
-                    usuarioEncontrado = true;
-                    this.usuario = usuario;
-                    lblUsuarioNoEncontrado.Visible = false;
-                    // Mostrar datos del usuario encontrado
-                    /*MessageBox.Show(
-                        $"Usuario encontrado:\n\n" +
-                                        $"ID: {usuario[0]}\n" +
-                                        $"Nombre: {usuario[1]} {usuario[2]}\n" +
-                                        $"Edad: {usuario[3]}\n" +
-                                        $"Teléfono: {usuario[4]}\n" +
-                                        $"Email: {usuario[5]}\n" +
-                                        $"Dirección: {usuario[6]}\n" +
-                                        $"Código de Cliente: {usuario[7]}"
-                        );*/
+                    cn.Open();
 
-                    // Confirmar si es el usuario correcto
-                    DialogResult resultado = MessageBox.Show(
-                                        "¿Es el usuario correcto?\n\n"+
-                                        $"ID: {usuario[0]}\n" +
-                                        $"Nombre: {usuario[1]} {usuario[2]}\n" +
-                                        $"Edad: {usuario[3]}\n" +
-                                        $"Teléfono: {usuario[4]}\n" +
-                                        $"Email: {usuario[5]}\n" +
-                                        $"Dirección: {usuario[6]}\n" +
-                                        $"Código de Cliente: {usuario[7]}", 
-                                        "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    // Intentamos convertir la entrada a número (por si es idCliente)
+                    int idBuscado = 0;
+                    int.TryParse(entrada, out idBuscado);
 
-                    if (resultado == DialogResult.Yes)
+                    string sql = @"
+                SELECT idCliente, nombre, apellido, direccion, telefono, email
+                FROM clientes
+                WHERE idCliente = @id
+                   OR telefono = @texto
+                   OR LOWER(email) = LOWER(@texto)
+                LIMIT 1;
+            ";
+
+                    using (var cmd = new MySqlCommand(sql, cn))
                     {
-                    // Si es el usuario correcto abrir formulario 3
-                    Form3 form3 = new Form3(usuario);
-                    form3.Show();
-                    this.Hide();
+                        cmd.Parameters.AddWithValue("@id", idBuscado);
+                        cmd.Parameters.AddWithValue("@texto", entrada);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                usuarioEncontrado = true;
+
+                                // Construimos la lista como antes
+                                this.usuario = new List<dynamic>
+                        {
+                            reader["idCliente"],                     // [0] ID
+                            reader["nombre"].ToString(),             // [1] Nombre
+                            reader["apellido"].ToString(),           // [2] Apellido
+                            "N/A",                                   // [3] Edad (ya no la usamos)
+                            reader["telefono"]?.ToString(),          // [4] Teléfono
+                            reader["email"]?.ToString(),             // [5] Email
+                            reader["direccion"]?.ToString(),         // [6] Dirección
+                            "N/A"                                    // [7] Código de cliente (placeholder)
+                        };
+
+                                DialogResult resultado = MessageBox.Show(
+                                    "¿Es el usuario correcto?\n\n" +
+                                    $"ID: {this.usuario[0]}\n" +
+                                    $"Nombre: {this.usuario[1]} {this.usuario[2]}\n" +
+                                    $"Edad: {this.usuario[3]}\n" +
+                                    $"Teléfono: {this.usuario[4]}\n" +
+                                    $"Email: {this.usuario[5]}\n" +
+                                    $"Dirección: {this.usuario[6]}\n" +
+                                    $"Código de Cliente: {this.usuario[7]}",
+                                    "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                                if (resultado == DialogResult.Yes)
+                                {
+                                    Form3 form3 = new Form3(this.usuario);
+                                    form3.Show();
+                                    this.Hide();
+                                }
+                            }
+                        }
                     }
                 }
 
-                // Si no se encuentra el usuario
                 if (!usuarioEncontrado)
                 {
                     lblUsuarioNoEncontrado.Visible = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar usuario: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
