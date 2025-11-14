@@ -37,7 +37,6 @@
             this.btnUsuarioNuevo = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.rdbTodos = new System.Windows.Forms.RadioButton();
             this.rdbIdCliente = new System.Windows.Forms.RadioButton();
             this.rdbTelefono = new System.Windows.Forms.RadioButton();
@@ -141,17 +140,6 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Filtros:";
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(0, 0);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 17;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
             // rdbTodos
             // 
             this.rdbTodos.AutoSize = true;
@@ -209,7 +197,6 @@
             this.Controls.Add(this.rdbTelefono);
             this.Controls.Add(this.rdbIdCliente);
             this.Controls.Add(this.rdbTodos);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnUsuarioNuevo);
             this.Controls.Add(this.lblUsuarioNoEncontrado);
@@ -238,7 +225,6 @@
         private System.Windows.Forms.Button btnUsuarioNuevo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton rdbTodos;
         private System.Windows.Forms.RadioButton rdbIdCliente;
         private System.Windows.Forms.RadioButton rdbTelefono;

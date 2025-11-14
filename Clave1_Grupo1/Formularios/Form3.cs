@@ -13,34 +13,25 @@ namespace Clave1_Grupo1
     public partial class Form3 : Form
     {
         // Definir varables globales
-        List<dynamic> _usuario = new List<dynamic>();
-        public Form3(List<dynamic> usuario)
+        Dictionary<string, string> _usuario = new Dictionary<string, string>();
+        public Form3(Dictionary<string, string> usuario)
         {
             InitializeComponent();
             _usuario = usuario;
-
         }
+
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            /*MessageBox.Show(
-                $"Bienvenido al sistema, {_usuario[1]} {_usuario[2]}!\n\n" +
-                $"ID: {_usuario[0]}\n" +
-                $"Nombre: {_usuario[1]} {_usuario[2]}\n" +
-                $"Edad: {_usuario[3]}\n" +
-                $"Teléfono: {_usuario[4]}\n" +
-                $"Email: {_usuario[5]}\n" +
-                $"Dirección: {_usuario[6]}\n" +
-                $"Código de Cliente: {_usuario[7]}"
-            );*/
 
             // Mostrar el ID en el texto del formulario
-            this.Text = $"Cuenta: {_usuario[0]}";
+            this.Text = $"Cuenta: {_usuario["idCliente"]}";
 
             // Mostrar los datos del usuario en los textBoxes
-            txtPropietario.Text = $"{_usuario[1]} {_usuario[2]}";
-            txtEmail.Text = _usuario[5];
-            txtTelefono.Text = _usuario[4];
+            txtPropietario.Text = $"{_usuario["nombre"]} {_usuario["apellido"]}";
+            txtEmail.Text = _usuario["correo"];
+            txtTelefono.Text = _usuario["telefono"];
+
 
             // Mostrar las fechas disponibles en negrita en mcCalendarioAgendarCita
             mcCalendarioAgendarCita.BoldedDates = new DateTime[]
@@ -68,21 +59,19 @@ namespace Clave1_Grupo1
         private void tabPage1_Click(object sender, EventArgs e)
         {
 
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota();
+            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota(_usuario);
             nuevaMascotaForm.ShowDialog();
 
         }
 
         private void btnNuevaMascota_Click(object sender, EventArgs e)
         {
-            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota();
+            int idCliente = int.Parse(_usuario["idCliente"]);
+            frmNuevaMascota nuevaMascotaForm = new frmNuevaMascota(idCliente);
             nuevaMascotaForm.ShowDialog();
         }
     }

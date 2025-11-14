@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace Clave1_Grupo1
 {
@@ -26,9 +27,13 @@ namespace Clave1_Grupo1
         //Instancia para conexión a MySQL, recibe la cadena de conexión
         static MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
 
-        public frmNuevaMascota()
+        // definir variable para idCliente (Clave Foránea) del dueño de la mascota
+        int _idCliente;
+
+        public frmNuevaMascota(int idCliente)
         {
             InitializeComponent();
+            _idCliente = idCliente;
         }
 
         private void frmNuevaMascota_Load(object sender, EventArgs e)
@@ -57,7 +62,7 @@ namespace Clave1_Grupo1
                 consulta.Parameters.AddWithValue("@raza", txtRaza.Text);
                 consulta.Parameters.AddWithValue("@sexo", txtSexo.Text);
                 consulta.Parameters.AddWithValue("@fechaNacimiento", txtFechaNacimiento.Text);
-                consulta.Parameters.AddWithValue("@idCliente", 1); // Valor de la Clave Foránea
+                consulta.Parameters.AddWithValue("@idCliente", _idCliente); // Valor de la Clave Foránea
 
                 // 3. Ejecutar la consulta
                 int filasAfectadas = consulta.ExecuteNonQuery();
