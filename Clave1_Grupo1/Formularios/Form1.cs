@@ -113,7 +113,6 @@ namespace Clave1_Grupo1
             this.Hide();
             Form2 form2 = new Form2();
             form2.ShowDialog();
-            this.Show();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
