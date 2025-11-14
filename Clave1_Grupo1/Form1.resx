@@ -120,11 +120,14 @@
   <metadata name="erpEmail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAcgAAAIFCAYAAABWP20dAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAA/7JJREFUeF7s/YfXZVWVLg7f/+f7xm9847aigqGjIihgut19QydUBAU73muHOzrd
+        vAAADrwBlbxySQAA/7JJREFUeF7s/YfXZVWVLg7f/+f7xm9847aigqGjIihgut19QydUBAU73muHOzrd
         X8fbdrcKVFFUkUxkCgkqiIpNKzkVFDlTVHor1xsL1jefGdaea+6199knvYU2562n1gwrp+esffbZ5z8d
         PnIkHT58OB2lcHFxMS0vL6eV1dW0trqW1tbW0rFjxxivv/56wBsSvkEhAJ1ltWV9OryhqPkA8/s4Jnu7
         yfPGepYVQf+1bG/hLUyL4zmngXHX8qg48B/TsIYY19u93/uivSuOR4xjerSbr0/vg8+zli7aYrxaGrOb
