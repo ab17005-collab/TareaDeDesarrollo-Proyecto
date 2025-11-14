@@ -110,14 +110,14 @@
             // 
             // btnUsuarioNuevo
             // 
-            this.btnUsuarioNuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUsuarioNuevo.Location = new System.Drawing.Point(304, 38);
-            this.btnUsuarioNuevo.Name = "btnUsuarioNuevo";
-            this.btnUsuarioNuevo.Size = new System.Drawing.Size(114, 23);
-            this.btnUsuarioNuevo.TabIndex = 15;
-            this.btnUsuarioNuevo.Text = "Usuario Nuevo";
-            this.btnUsuarioNuevo.UseVisualStyleBackColor = true;
-            this.btnUsuarioNuevo.Click += new System.EventHandler(this.btnUsuarioNuevo_Click);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(304, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Crear usuario";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
             // label3
             // 
