@@ -38,55 +38,64 @@ namespace Clave1_Grupo1
 
         private void frmNuevaMascota_Load(object sender, EventArgs e)
         {
-
+            cbxSexo.Items.Clear();
+            cbxSexo.Items.Add("Seleccionar");
+            cbxSexo.Items.Add("Macho");
+            cbxSexo.Items.Add("Hembra");
+            cbxSexo.SelectedIndex = 0;
+            cbxSexo.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                // 1. Abrir la conexión
-                conexionBD.Open();
-
-                // 2. Crear el comando SQL
-                MySqlCommand consulta = new MySqlCommand();
-                consulta.Connection = conexionBD;
-
-                // **IMPORTANTE: Usar Parámetros para SEGURIDAD y evitar errores de SQL Injection**
-                consulta.CommandText = "INSERT INTO mascotas (idMascota, nombre, especie, raza, sexo, fechaNacimiento, idCliente) " +
-                                       "VALUES (0, @nombre, @especie, @raza, @sexo, @fechaNacimiento, @idCliente)";
-
-                // Asignar los valores a los parámetros
-                consulta.Parameters.AddWithValue("@nombre", txtNombre.Text);
-                consulta.Parameters.AddWithValue("@especie", txtEspecie.Text);
-                consulta.Parameters.AddWithValue("@raza", txtRaza.Text);
-                consulta.Parameters.AddWithValue("@sexo", txtSexo.Text);
-                consulta.Parameters.AddWithValue("@fechaNacimiento", txtFechaNacimiento.Text);
-                consulta.Parameters.AddWithValue("@idCliente", _idCliente); // Valor de la Clave Foránea
-
-                // 3. Ejecutar la consulta
-                int filasAfectadas = consulta.ExecuteNonQuery();
-
-                if (filasAfectadas > 0)
+                // Crear objeto Mascota con los datos del formulario
+                Mascota nuevaMascota = new Mascota
                 {
-                    MessageBox.Show("Mascota guardada exitosamente.");
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo guardar la mascota.");
-                }
+                    Nombre = txtNombre.Text.Trim(),
+                    Especie = txtEspecie.Text.Trim(),
+                    Raza = txtRaza.Text.Trim(),
+                    Sexo = cbxSexo.SelectedItem.ToString(),
+                    FechaNacimiento = dtpFechaNacimiento.Value,
+                    IdCliente = _idCliente
+                };
 
+                // Guardar en base de datos
+                GuardarMascotaEnBD(nuevaMascota);
+
+                MessageBox.Show("Mascota registrada exitosamente");
+                this.Close();
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
-                // Mostrar un error más específico
-                MessageBox.Show("Error al guardar en la base de datos. Asegúrate que el idCliente existe. \n\nDetalle: " + ex.Message);
-            }
-            // El bloque finally permanece igual
-            finally
-            {
-                conexionBD.Close(); //se cierra la conexion
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void GuardarMascotaEnBD(Mascota mascota)
+        {
+            string query = @"INSERT INTO mascotas 
+            (nombre, especie, raza, sexo, fecha_nacimiento, id_cliente)
+            VALUES (@nombre, @especie, @raza, @sexo, @fecha_nacimiento, @id_cliente)";
+
+            using (MySqlConnection con = new MySqlConnection(cadenaConexion))
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@nombre", mascota.Nombre);
+                cmd.Parameters.AddWithValue("@especie", mascota.Especie);
+                cmd.Parameters.AddWithValue("@raza", mascota.Raza);
+                cmd.Parameters.AddWithValue("@sexo", mascota.Sexo);
+                cmd.Parameters.AddWithValue("@fecha_nacimiento", mascota.FechaNacimiento.ToString("yyyy-MM-dd"));
+                cmd.Parameters.AddWithValue("@id_cliente", mascota.IdCliente);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+
     }
 }

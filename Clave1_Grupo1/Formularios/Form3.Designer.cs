@@ -31,23 +31,23 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.rtbNotas = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.clbMotivo = new System.Windows.Forms.CheckedListBox();
             this.dgvSlotsDisponibles = new System.Windows.Forms.DataGridView();
             this.mcCalendarioAgendarCita = new System.Windows.Forms.MonthCalendar();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnAgendar = new System.Windows.Forms.Button();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtPropietario = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.rtbDiagnostico = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnNuevaMascota = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxMascotas = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.cbxVeterinario = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSlotsDisponibles)).BeginInit();
@@ -84,25 +85,27 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbxVeterinario);
             this.tabPage1.Controls.Add(this.checkBox1);
-            this.tabPage1.Controls.Add(this.richTextBox2);
+            this.tabPage1.Controls.Add(this.rtbNotas);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.checkedListBox1);
+            this.tabPage1.Controls.Add(this.clbMotivo);
             this.tabPage1.Controls.Add(this.dgvSlotsDisponibles);
             this.tabPage1.Controls.Add(this.mcCalendarioAgendarCita);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.btnAgendar);
             this.tabPage1.Controls.Add(this.txtTelefono);
             this.tabPage1.Controls.Add(this.txtEmail);
             this.tabPage1.Controls.Add(this.txtPropietario);
-            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.rtbDiagnostico);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.btnNuevaMascota);
-            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.cbxMascotas);
             this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 39);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -115,30 +118,33 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.checkBox1.Location = new System.Drawing.Point(443, 277);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 20);
+            this.checkBox1.Size = new System.Drawing.Size(129, 19);
             this.checkBox1.TabIndex = 22;
-            this.checkBox1.Text = "Comentarios";
+            this.checkBox1.Text = "COMENTARIOS:";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // richTextBox2
+            // rtbNotas
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox2.Location = new System.Drawing.Point(443, 303);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(227, 148);
-            this.richTextBox2.TabIndex = 21;
-            this.richTextBox2.Text = "";
+            this.rtbNotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbNotas.Location = new System.Drawing.Point(443, 303);
+            this.rtbNotas.Name = "rtbNotas";
+            this.rtbNotas.Size = new System.Drawing.Size(227, 148);
+            this.rtbNotas.TabIndex = 21;
+            this.rtbNotas.Text = "";
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Location = new System.Drawing.Point(483, 547);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(290, 32);
             this.button3.TabIndex = 20;
             this.button3.Text = "Cancelar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label6
             // 
@@ -150,13 +156,13 @@
             this.label6.TabIndex = 19;
             this.label6.Text = "MOTIVO DE LA CITA:";
             // 
-            // checkedListBox1
+            // clbMotivo
             // 
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.ColumnWidth = 170;
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.clbMotivo.CheckOnClick = true;
+            this.clbMotivo.ColumnWidth = 170;
+            this.clbMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clbMotivo.FormattingEnabled = true;
+            this.clbMotivo.Items.AddRange(new object[] {
             "Esterilización",
             "Vacunación",
             "Cirugía dental",
@@ -165,18 +171,18 @@
             "Dermatología",
             "Medicina general",
             "Otro"});
-            this.checkedListBox1.Location = new System.Drawing.Point(46, 333);
-            this.checkedListBox1.MultiColumn = true;
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(355, 89);
-            this.checkedListBox1.TabIndex = 2;
+            this.clbMotivo.Location = new System.Drawing.Point(46, 333);
+            this.clbMotivo.MultiColumn = true;
+            this.clbMotivo.Name = "clbMotivo";
+            this.clbMotivo.Size = new System.Drawing.Size(355, 89);
+            this.clbMotivo.TabIndex = 2;
             // 
             // dgvSlotsDisponibles
             // 
             this.dgvSlotsDisponibles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSlotsDisponibles.Location = new System.Drawing.Point(711, 66);
+            this.dgvSlotsDisponibles.Location = new System.Drawing.Point(711, 136);
             this.dgvSlotsDisponibles.Name = "dgvSlotsDisponibles";
-            this.dgvSlotsDisponibles.Size = new System.Drawing.Size(407, 385);
+            this.dgvSlotsDisponibles.Size = new System.Drawing.Size(407, 315);
             this.dgvSlotsDisponibles.TabIndex = 18;
             // 
             // mcCalendarioAgendarCita
@@ -185,14 +191,16 @@
             this.mcCalendarioAgendarCita.Name = "mcCalendarioAgendarCita";
             this.mcCalendarioAgendarCita.TabIndex = 17;
             // 
-            // button2
+            // btnAgendar
             // 
-            this.button2.Location = new System.Drawing.Point(828, 547);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(290, 32);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Agendar Cita";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAgendar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgendar.Location = new System.Drawing.Point(828, 547);
+            this.btnAgendar.Name = "btnAgendar";
+            this.btnAgendar.Size = new System.Drawing.Size(290, 32);
+            this.btnAgendar.TabIndex = 16;
+            this.btnAgendar.Text = "Agendar Cita";
+            this.btnAgendar.UseVisualStyleBackColor = true;
+            this.btnAgendar.Click += new System.EventHandler(this.btnAgendar_Click);
             // 
             // txtTelefono
             // 
@@ -221,14 +229,14 @@
             this.txtPropietario.Size = new System.Drawing.Size(360, 22);
             this.txtPropietario.TabIndex = 13;
             // 
-            // richTextBox1
+            // rtbDiagnostico
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(41, 464);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(360, 128);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
+            this.rtbDiagnostico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbDiagnostico.Location = new System.Drawing.Point(41, 464);
+            this.rtbDiagnostico.Name = "rtbDiagnostico";
+            this.rtbDiagnostico.Size = new System.Drawing.Size(360, 128);
+            this.rtbDiagnostico.TabIndex = 12;
+            this.rtbDiagnostico.Text = "";
             // 
             // label5
             // 
@@ -236,9 +244,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(38, 436);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 15);
+            this.label5.Size = new System.Drawing.Size(103, 15);
             this.label5.TabIndex = 11;
-            this.label5.Text = "SINTOMAS: ";
+            this.label5.Text = "DIAGNOSTICO:";
             // 
             // label4
             // 
@@ -281,14 +289,14 @@
             this.btnNuevaMascota.UseVisualStyleBackColor = true;
             this.btnNuevaMascota.Click += new System.EventHandler(this.btnNuevaMascota_Click);
             // 
-            // comboBox1
+            // cbxMascotas
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(41, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(228, 24);
-            this.comboBox1.TabIndex = 3;
+            this.cbxMascotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxMascotas.FormattingEnabled = true;
+            this.cbxMascotas.Location = new System.Drawing.Point(41, 38);
+            this.cbxMascotas.Name = "cbxMascotas";
+            this.cbxMascotas.Size = new System.Drawing.Size(228, 24);
+            this.cbxMascotas.TabIndex = 3;
             // 
             // label1
             // 
@@ -385,6 +393,14 @@
             this.tabPage4.Text = "Expedientes";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // cbxVeterinario
+            // 
+            this.cbxVeterinario.FormattingEnabled = true;
+            this.cbxVeterinario.Location = new System.Drawing.Point(711, 88);
+            this.cbxVeterinario.Name = "cbxVeterinario";
+            this.cbxVeterinario.Size = new System.Drawing.Size(198, 24);
+            this.cbxVeterinario.TabIndex = 25;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,22 +431,22 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNuevaMascota;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxMascotas;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox rtbDiagnostico;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtPropietario;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAgendar;
         private System.Windows.Forms.MonthCalendar mcCalendarioAgendarCita;
         private System.Windows.Forms.DataGridView dgvSlotsDisponibles;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox clbMotivo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox rtbNotas;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView dataGridView3;
@@ -439,5 +455,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbxVeterinario;
     }
 }

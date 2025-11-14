@@ -31,8 +31,6 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtEspecie = new System.Windows.Forms.TextBox();
             this.txtRaza = new System.Windows.Forms.TextBox();
-            this.txtSexo = new System.Windows.Forms.TextBox();
-            this.txtFechaNacimiento = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +39,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.dtpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.cbxSexo = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -63,20 +63,6 @@
             this.txtRaza.Name = "txtRaza";
             this.txtRaza.Size = new System.Drawing.Size(224, 20);
             this.txtRaza.TabIndex = 2;
-            // 
-            // txtSexo
-            // 
-            this.txtSexo.Location = new System.Drawing.Point(128, 221);
-            this.txtSexo.Name = "txtSexo";
-            this.txtSexo.Size = new System.Drawing.Size(224, 20);
-            this.txtSexo.TabIndex = 3;
-            // 
-            // txtFechaNacimiento
-            // 
-            this.txtFechaNacimiento.Location = new System.Drawing.Point(128, 257);
-            this.txtFechaNacimiento.Name = "txtFechaNacimiento";
-            this.txtFechaNacimiento.Size = new System.Drawing.Size(224, 20);
-            this.txtFechaNacimiento.TabIndex = 4;
             // 
             // btnGuardar
             // 
@@ -136,11 +122,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 260);
+            this.label5.Location = new System.Drawing.Point(78, 264);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Sexo";
+            this.label5.Text = "Nacimiento";
             // 
             // label6
             // 
@@ -152,11 +138,31 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Datos de la nueva mascota";
             // 
+            // dtpFechaNacimiento
+            // 
+            this.dtpFechaNacimiento.Location = new System.Drawing.Point(144, 262);
+            this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
+            this.dtpFechaNacimiento.Size = new System.Drawing.Size(200, 20);
+            this.dtpFechaNacimiento.TabIndex = 14;
+            // 
+            // cbxSexo
+            // 
+            this.cbxSexo.FormattingEnabled = true;
+            this.cbxSexo.Items.AddRange(new object[] {
+            "Macho",
+            "Hembra"});
+            this.cbxSexo.Location = new System.Drawing.Point(128, 221);
+            this.cbxSexo.Name = "cbxSexo";
+            this.cbxSexo.Size = new System.Drawing.Size(121, 21);
+            this.cbxSexo.TabIndex = 15;
+            // 
             // frmNuevaMascota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(439, 431);
+            this.Controls.Add(this.cbxSexo);
+            this.Controls.Add(this.dtpFechaNacimiento);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -165,8 +171,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.txtFechaNacimiento);
-            this.Controls.Add(this.txtSexo);
             this.Controls.Add(this.txtRaza);
             this.Controls.Add(this.txtEspecie);
             this.Controls.Add(this.txtNombre);
@@ -183,8 +187,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtEspecie;
         private System.Windows.Forms.TextBox txtRaza;
-        private System.Windows.Forms.TextBox txtSexo;
-        private System.Windows.Forms.TextBox txtFechaNacimiento;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label label1;
@@ -193,5 +195,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dtpFechaNacimiento;
+        private System.Windows.Forms.ComboBox cbxSexo;
     }
 }
