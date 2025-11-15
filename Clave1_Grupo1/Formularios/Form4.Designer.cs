@@ -67,11 +67,12 @@
             this.lblVeterinario = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnModificarReagendar = new System.Windows.Forms.Button();
+            this.btnCanelarCita = new System.Windows.Forms.Button();
+            this.btnListo = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.lblCitaId = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -534,42 +535,44 @@
             this.label15.TabIndex = 13;
             this.label15.Text = "Detalles de la cita";
             // 
-            // button1
+            // btnModificarReagendar
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(73)))), ((int)(((byte)(141)))));
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(282, 640);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(194, 33);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "🗓️ Modificar / Reagendar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnModificarReagendar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(73)))), ((int)(((byte)(141)))));
+            this.btnModificarReagendar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarReagendar.ForeColor = System.Drawing.Color.White;
+            this.btnModificarReagendar.Location = new System.Drawing.Point(282, 640);
+            this.btnModificarReagendar.Name = "btnModificarReagendar";
+            this.btnModificarReagendar.Size = new System.Drawing.Size(194, 33);
+            this.btnModificarReagendar.TabIndex = 14;
+            this.btnModificarReagendar.Text = "🗓️ Modificar / Reagendar";
+            this.btnModificarReagendar.UseVisualStyleBackColor = false;
+            this.btnModificarReagendar.Click += new System.EventHandler(this.btnModificarReagendar_Click);
             // 
-            // button2
+            // btnCanelarCita
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(24)))), ((int)(((byte)(61)))));
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(49, 640);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(197, 33);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "⛔ Cancelar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCanelarCita.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(24)))), ((int)(((byte)(61)))));
+            this.btnCanelarCita.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCanelarCita.ForeColor = System.Drawing.Color.White;
+            this.btnCanelarCita.Location = new System.Drawing.Point(49, 640);
+            this.btnCanelarCita.Name = "btnCanelarCita";
+            this.btnCanelarCita.Size = new System.Drawing.Size(197, 33);
+            this.btnCanelarCita.TabIndex = 15;
+            this.btnCanelarCita.Text = "⛔ Cancelar";
+            this.btnCanelarCita.UseVisualStyleBackColor = false;
+            this.btnCanelarCita.Click += new System.EventHandler(this.btnCanelarCita_Click);
             // 
-            // button3
+            // btnListo
             // 
-            this.button3.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(704, 640);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(223, 33);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "✔️ Listo";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnListo.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnListo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnListo.ForeColor = System.Drawing.Color.White;
+            this.btnListo.Location = new System.Drawing.Point(704, 640);
+            this.btnListo.Name = "btnListo";
+            this.btnListo.Size = new System.Drawing.Size(223, 33);
+            this.btnListo.TabIndex = 16;
+            this.btnListo.Text = "✔️ Listo";
+            this.btnListo.UseVisualStyleBackColor = false;
+            this.btnListo.Click += new System.EventHandler(this.btnListo_Click);
             // 
             // label29
             // 
@@ -593,17 +596,29 @@
             this.lblCitaId.TabIndex = 18;
             this.lblCitaId.Text = "Cita #: 60527829";
             // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(114)))), ((int)(((byte)(130)))));
+            this.lblEstado.Location = new System.Drawing.Point(770, 50);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(118, 18);
+            this.lblEstado.TabIndex = 19;
+            this.lblEstado.Text = "Estado: Proxima";
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(250)))), ((int)(((byte)(251)))));
             this.ClientSize = new System.Drawing.Size(988, 704);
+            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.lblCitaId);
             this.Controls.Add(this.label29);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnListo);
+            this.Controls.Add(this.btnCanelarCita);
+            this.Controls.Add(this.btnModificarReagendar);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -657,9 +672,9 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label lblEdad;
         private System.Windows.Forms.Label lblEspecie;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnModificarReagendar;
+        private System.Windows.Forms.Button btnCanelarCita;
+        private System.Windows.Forms.Button btnListo;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label33;
@@ -670,5 +685,6 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label lblDiagnostico;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label lblEstado;
     }
 }

@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabCitas = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cbxVeterinario = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.rtbNotas = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -53,35 +54,34 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvCitasCanceladas = new System.Windows.Forms.DataGridView();
+            this.dgvCitasPasadas = new System.Windows.Forms.DataGridView();
+            this.dgvProximasCitas = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.cbxVeterinario = new System.Windows.Forms.ComboBox();
-            this.tabControl1.SuspendLayout();
+            this.tabCitas.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSlotsDisponibles)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCitasCanceladas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCitasPasadas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProximasCitas)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabCitas
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(10, 10);
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1166, 659);
-            this.tabControl1.TabIndex = 0;
+            this.tabCitas.Controls.Add(this.tabPage1);
+            this.tabCitas.Controls.Add(this.tabPage2);
+            this.tabCitas.Controls.Add(this.tabPage3);
+            this.tabCitas.Controls.Add(this.tabPage4);
+            this.tabCitas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabCitas.Location = new System.Drawing.Point(12, 12);
+            this.tabCitas.Multiline = true;
+            this.tabCitas.Name = "tabCitas";
+            this.tabCitas.Padding = new System.Drawing.Point(10, 10);
+            this.tabCitas.SelectedIndex = 0;
+            this.tabCitas.Size = new System.Drawing.Size(1166, 659);
+            this.tabCitas.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -114,6 +114,14 @@
             this.tabPage1.Text = "Agendar cita";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // cbxVeterinario
+            // 
+            this.cbxVeterinario.FormattingEnabled = true;
+            this.cbxVeterinario.Location = new System.Drawing.Point(711, 88);
+            this.cbxVeterinario.Name = "cbxVeterinario";
+            this.cbxVeterinario.Size = new System.Drawing.Size(198, 24);
+            this.cbxVeterinario.TabIndex = 25;
             // 
             // checkBox1
             // 
@@ -313,9 +321,9 @@
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.dataGridView3);
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.dgvCitasCanceladas);
+            this.tabPage2.Controls.Add(this.dgvCitasPasadas);
+            this.tabPage2.Controls.Add(this.dgvProximasCitas);
             this.tabPage2.Location = new System.Drawing.Point(4, 39);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -351,29 +359,29 @@
             this.label7.TabIndex = 3;
             this.label7.Text = "Proximas citas";
             // 
-            // dataGridView3
+            // dgvCitasCanceladas
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(790, 142);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(312, 407);
-            this.dataGridView3.TabIndex = 2;
+            this.dgvCitasCanceladas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCitasCanceladas.Location = new System.Drawing.Point(790, 142);
+            this.dgvCitasCanceladas.Name = "dgvCitasCanceladas";
+            this.dgvCitasCanceladas.Size = new System.Drawing.Size(312, 407);
+            this.dgvCitasCanceladas.TabIndex = 2;
             // 
-            // dataGridView2
+            // dgvCitasPasadas
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(423, 142);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(312, 407);
-            this.dataGridView2.TabIndex = 1;
+            this.dgvCitasPasadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCitasPasadas.Location = new System.Drawing.Point(423, 142);
+            this.dgvCitasPasadas.Name = "dgvCitasPasadas";
+            this.dgvCitasPasadas.Size = new System.Drawing.Size(312, 407);
+            this.dgvCitasPasadas.TabIndex = 1;
             // 
-            // dataGridView1
+            // dgvProximasCitas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(56, 142);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(312, 407);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvProximasCitas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProximasCitas.Location = new System.Drawing.Point(56, 142);
+            this.dgvProximasCitas.Name = "dgvProximasCitas";
+            this.dgvProximasCitas.Size = new System.Drawing.Size(312, 407);
+            this.dgvProximasCitas.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -393,39 +401,31 @@
             this.tabPage4.Text = "Expedientes";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // cbxVeterinario
-            // 
-            this.cbxVeterinario.FormattingEnabled = true;
-            this.cbxVeterinario.Location = new System.Drawing.Point(711, 88);
-            this.cbxVeterinario.Name = "cbxVeterinario";
-            this.cbxVeterinario.Size = new System.Drawing.Size(198, 24);
-            this.cbxVeterinario.TabIndex = 25;
-            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1190, 686);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabCitas);
             this.Name = "Form3";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.Form3_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabCitas.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSlotsDisponibles)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCitasCanceladas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCitasPasadas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProximasCitas)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabCitas;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
@@ -448,9 +448,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.RichTextBox rtbNotas;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvProximasCitas;
+        private System.Windows.Forms.DataGridView dgvCitasCanceladas;
+        private System.Windows.Forms.DataGridView dgvCitasPasadas;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;

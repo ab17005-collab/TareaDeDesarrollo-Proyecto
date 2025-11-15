@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using Newtonsoft.Json;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace Clave1_Grupo1
 {
     public partial class Form3 : Form
     {
+        // Cadena de conexión a MySQL
         static string cadenaConexion =
             $"Server=localhost; Database=veterinariapatitasypelos; Uid=root; Pwd=root;";
 
+        // Datos del usuario (cliente) actual
         Dictionary<string, string> _usuario = new Dictionary<string, string>();
 
         // Diccionario de horarios (key = "8:00:00 AM - 8:30:00 AM", value = disponible?)
@@ -22,7 +24,14 @@ namespace Clave1_Grupo1
         // Id del registro de horarios actualmente cargado (si existe)
         int? horarioActualId = null;
 
-        // Clases internas para manejar ítems de combo
+        // Si no es null, el formulario está en modo edición de esta cita
+        int? _idCitaEdicion = null;
+
+        // Slot original de la cita al editar (para liberar si cambia)
+        string _slotOriginal = null;
+
+        // ====== Clases internas para manejar ítems de combo ======
+
         private class VeterinarioItem
         {
             public int IdVeterinario { get; set; }
@@ -42,11 +51,24 @@ namespace Clave1_Grupo1
             public override string ToString() => Nombre;
         }
 
+        // ====== Constructores ======
+
+        // Modo normal (crear cita)
         public Form3(Dictionary<string, string> usuario)
         {
             InitializeComponent();
             _usuario = usuario;
         }
+
+        // Modo edición de cita
+        public Form3(Dictionary<string, string> usuario, int idCitaEdicion)
+        {
+            InitializeComponent();
+            _usuario = usuario;
+            _idCitaEdicion = idCitaEdicion;
+        }
+
+        // ====== Load del formulario ======
 
         private void Form3_Load(object sender, EventArgs e)
         {
@@ -59,23 +81,35 @@ namespace Clave1_Grupo1
             CargarMascotas();
             CargarVeterinarios();
 
-            // Configuración del DataGridView
-            dgvSlotsDisponibles.Rows.Clear();
-            dgvSlotsDisponibles.Columns.Clear();
-            dgvSlotsDisponibles.Columns.Add("HorarioMatutino", "Horario Matutino");
-            dgvSlotsDisponibles.Columns.Add("HorarioVespertino", "Horario Vespertino");
-            dgvSlotsDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ConfigurarGridSlots();
 
-            // Configuración del calendar: ya viene configurado desde el diseñador.
-            // Nos aseguramos de tener una fecha seleccionada
             mcCalendarioAgendarCita.MaxSelectionCount = 1;
 
             // Generar horario por defecto (sin veterinario aún)
             GenerarYLlenarSlots();
 
-            // Suscribir eventos (por si no están en el diseñador)
+            // Eventos (por si no están en el diseñador)
             cbxVeterinario.SelectedIndexChanged += cbxVeterinario_SelectedIndexChanged;
             mcCalendarioAgendarCita.DateChanged += mcCalendarioAgendarCita_DateChanged;
+
+            // Eventos de los grids de citas
+            dgvProximasCitas.CellDoubleClick += dgvProximaCitas_CellDoubleClick;
+            dgvCitasPasadas.CellDoubleClick += dgvCitasPasadas_CellDoubleClick;
+            dgvCitasCanceladas.CellDoubleClick += dgvCitasCanceladas_CellDoubleClick;
+
+            // Cargar listas de citas del cliente
+            CargarCitasCliente();
+
+            // Si estamos editando una cita, cargar datos en controles
+            if (_idCitaEdicion.HasValue)
+            {
+                CargarDatosCitaEnFormulario(_idCitaEdicion.Value);
+                btnAgendar.Text = "Confirmar cambios";
+            }
+            else
+            {
+                btnAgendar.Text = "Agendar cita";
+            }
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -215,7 +249,16 @@ namespace Clave1_Grupo1
             CargarHorarioParaSeleccion();
         }
 
-        // ===================== HORARIOS / DGV =======================
+        // ===================== HORARIOS / DGV SLOTS =======================
+
+        private void ConfigurarGridSlots()
+        {
+            dgvSlotsDisponibles.Rows.Clear();
+            dgvSlotsDisponibles.Columns.Clear();
+            dgvSlotsDisponibles.Columns.Add("HorarioMatutino", "Horario Matutino");
+            dgvSlotsDisponibles.Columns.Add("HorarioVespertino", "Horario Vespertino");
+            dgvSlotsDisponibles.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
 
         // Genera horario por defecto para el día, sin guardar en DB
         private void GenerarYLlenarSlots()
@@ -254,7 +297,6 @@ namespace Clave1_Grupo1
         {
             dgvSlotsDisponibles.Rows.Clear();
 
-            // Ordenar por hora de inicio
             var keysOrdenadas = horaTurno.Keys.ToList();
             keysOrdenadas.Sort((a, b) =>
             {
@@ -296,7 +338,6 @@ namespace Clave1_Grupo1
         // Carga el horario de la tabla 'horarios' si existe; si no, genera uno nuevo
         private void CargarHorarioParaSeleccion()
         {
-            // Necesita veterinario seleccionado
             if (cbxVeterinario.SelectedIndex <= 0)
                 return;
 
@@ -341,14 +382,12 @@ namespace Clave1_Grupo1
                         }
                         else
                         {
-                            // No hay registro: se genera el horario por defecto y no se guarda todavía.
                             horarioActualId = null;
                             GenerarYLlenarSlots();
                             return;
                         }
                     }
 
-                    // Si se cargó desde JSON, se refresca el DGV
                     LlenarDgvDesdeHoraTurno();
                 }
                 catch (Exception ex)
@@ -358,7 +397,224 @@ namespace Clave1_Grupo1
             }
         }
 
-        // ===================== AGENDAR CITA =======================
+        // ===================== LISTAS DE CITAS DEL CLIENTE =======================
+
+        private void CargarCitasCliente()
+        {
+            int idCliente = int.Parse(_usuario["idCliente"]);
+
+            using (MySqlConnection con = new MySqlConnection(cadenaConexion))
+            {
+                con.Open();
+                LlenarGridCitas(dgvProximasCitas, con, idCliente, "proxima");
+                LlenarGridCitas(dgvCitasPasadas, con, idCliente, "pasada");
+                LlenarGridCitas(dgvCitasCanceladas, con, idCliente, "cancelada");
+            }
+        }
+
+        private void LlenarGridCitas(DataGridView dgv, MySqlConnection con, int idCliente, string estado)
+        {
+            dgv.Rows.Clear();
+            dgv.Columns.Clear();
+
+            dgv.Columns.Add("IdCita", "IdCita");
+            dgv.Columns["IdCita"].Visible = false;
+            dgv.Columns.Add("Mascota", "Mascota");
+            dgv.Columns.Add("Fecha", "Fecha");
+            dgv.Columns.Add("Hora", "Hora");
+
+            string query = @"
+                SELECT c.id_cita, m.nombre AS mascota, c.fecha_cita, c.hora_cita
+                FROM citas c
+                INNER JOIN mascotas m ON c.id_mascota = m.id_mascota
+                WHERE c.id_cliente = @idCliente AND c.estado = @estado
+                ORDER BY c.fecha_cita, c.hora_cita;";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+                cmd.Parameters.AddWithValue("@estado", estado);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idCita = reader.GetInt32("id_cita");
+                        DateTime fecha = reader.GetDateTime("fecha_cita");
+                        TimeSpan hora = reader.GetTimeSpan("hora_cita");
+                        string nombreMascota = reader.GetString("mascota");
+
+                        dgv.Rows.Add(
+                            idCita,
+                            nombreMascota,
+                            fecha.ToString("dd/MM/yyyy"),
+                            new DateTime(hora.Ticks).ToString("HH:mm")
+                        );
+                    }
+                }
+            }
+        }
+
+        private void dgvProximaCitas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            AbrirDetalleCitaDesdeGrid(dgvProximasCitas, e.RowIndex, true);
+        }
+
+        private void dgvCitasPasadas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            AbrirDetalleCitaDesdeGrid(dgvCitasPasadas, e.RowIndex, false);
+        }
+
+        private void dgvCitasCanceladas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            AbrirDetalleCitaDesdeGrid(dgvCitasCanceladas, e.RowIndex, false);
+        }
+
+        private void AbrirDetalleCitaDesdeGrid(DataGridView dgv, int rowIndex, bool permitirEdicion)
+        {
+            if (rowIndex < 0 || rowIndex >= dgv.Rows.Count) return;
+            var row = dgv.Rows[rowIndex];
+            if (row.Cells["IdCita"].Value == null) return;
+
+            int idCita = Convert.ToInt32(row.Cells["IdCita"].Value);
+
+            using (Form4 f4 = new Form4(idCita, permitirEdicion, _usuario))
+            {
+                f4.ShowDialog();
+            }
+
+            // Al cerrar Form4, recargar listas y dejar tab de citas activo
+            CargarCitasCliente();
+            try
+            {
+                tabCitas.SelectedTab = tabPage2;
+            }
+            catch { }
+        }
+
+        // ===================== CARGAR UNA CITA EN MODO EDICIÓN =======================
+
+        private void CargarDatosCitaEnFormulario(int idCita)
+        {
+            int idCliente = int.Parse(_usuario["idCliente"]);
+
+            using (MySqlConnection con = new MySqlConnection(cadenaConexion))
+            {
+                con.Open();
+
+                string query = @"
+                    SELECT c.fecha_cita, c.hora_cita, c.motivo, c.diagnostico, c.notas, c.estado,
+                           c.id_mascota, c.id_veterinario,
+                           m.nombre AS nombreMascota, m.especie, m.raza, m.sexo, m.fecha_nacimiento
+                    FROM citas c
+                    INNER JOIN mascotas m ON c.id_mascota = m.id_mascota
+                    WHERE c.id_cita = @idCita AND c.id_cliente = @idCliente;";
+
+                MySqlCommand cmd = new MySqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@idCita", idCita);
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (!reader.Read())
+                    {
+                        MessageBox.Show("No se encontró la cita para este cliente.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    DateTime fechaCita = reader.GetDateTime("fecha_cita");
+                    TimeSpan horaCita = reader.GetTimeSpan("hora_cita");
+                    string motivo = reader.GetString("motivo");
+                    string diagnostico = reader.IsDBNull(reader.GetOrdinal("diagnostico")) ? "" : reader.GetString("diagnostico");
+                    string notas = reader.IsDBNull(reader.GetOrdinal("notas")) ? "" : reader.GetString("notas");
+                    int idMascota = reader.GetInt32("id_mascota");
+                    int idVeterinario = reader.GetInt32("id_veterinario");
+
+                    // Configurar fecha
+                    mcCalendarioAgendarCita.SetDate(fechaCita.Date);
+
+                    // Seleccionar mascota
+                    for (int i = 0; i < cbxMascotas.Items.Count; i++)
+                    {
+                        if (cbxMascotas.Items[i] is MascotaItem mItem && mItem.IdMascota == idMascota)
+                        {
+                            cbxMascotas.SelectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    // Seleccionar veterinario
+                    for (int i = 0; i < cbxVeterinario.Items.Count; i++)
+                    {
+                        if (cbxVeterinario.Items[i] is VeterinarioItem vItem && vItem.IdVeterinario == idVeterinario)
+                        {
+                            cbxVeterinario.SelectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    // Texto
+                    rtbDiagnostico.Text = diagnostico;
+                    rtbNotas.Text = notas;
+
+                    // Motivos: se asume que se guardaron como "texto1, texto2, ..."
+                    var motivos = motivo.Split(',')
+                                        .Select(x => x.Trim())
+                                        .Where(x => !string.IsNullOrEmpty(x))
+                                        .ToList();
+
+                    for (int i = 0; i < clbMotivo.Items.Count; i++)
+                    {
+                        string itemText = clbMotivo.Items[i].ToString();
+                        clbMotivo.SetItemChecked(i, motivos.Contains(itemText));
+                    }
+
+                    // Cargar horario desde BD para (vet, fecha)
+                    CargarHorarioParaSeleccion();
+
+                    // Guardar slot original y marcarlo como disponible para poder cambiarlo
+                    _slotOriginal = ConstruirSlotDesdeHora(horaCita);
+
+                    if (horaTurno.ContainsKey(_slotOriginal) == false)
+                    {
+                        horaTurno[_slotOriginal] = true;
+                    }
+                    else
+                    {
+                        horaTurno[_slotOriginal] = true;
+                    }
+
+                    LlenarDgvDesdeHoraTurno();
+
+                    // Seleccionar en el grid el slot original
+                    foreach (DataGridViewRow row in dgvSlotsDisponibles.Rows)
+                    {
+                        for (int c = 0; c < row.Cells.Count; c++)
+                        {
+                            if (row.Cells[c].Value != null &&
+                                row.Cells[c].Value.ToString() == _slotOriginal)
+                            {
+                                dgvSlotsDisponibles.CurrentCell = row.Cells[c];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private string ConstruirSlotDesdeHora(TimeSpan hora)
+        {
+            DateTime inicio = DateTime.Today.Add(hora);
+            DateTime fin = inicio.AddMinutes(30);
+            return $"{inicio:h:mm:ss tt} - {fin:h:mm:ss tt}";
+        }
+
+        // ===================== AGENDAR / EDITAR CITA =======================
 
         private void btnAgendar_Click(object sender, EventArgs e)
         {
@@ -400,7 +656,7 @@ namespace Clave1_Grupo1
                 return;
             }
 
-            if (!horaTurno[slotKey])
+            if (!_idCitaEdicion.HasValue && !horaTurno[slotKey])
             {
                 MessageBox.Show("El horario seleccionado ya está ocupado.", "Horario no disponible",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -431,7 +687,36 @@ namespace Clave1_Grupo1
             int idMascota = mascota.IdMascota;
             int idVeterinario = vet.IdVeterinario;
 
-            // 1) Actualizar el diccionario marcando el slot como ocupado
+            if (_idCitaEdicion.HasValue)
+            {
+                ActualizarCitaExistente(slotKey, fecha, fechaCita, horaCita,
+                                        idCliente, idMascota, idVeterinario,
+                                        motivo, diagnostico, notas);
+            }
+            else
+            {
+                CrearNuevaCita(slotKey, fecha, fechaCita, horaCita,
+                               idCliente, idMascota, idVeterinario,
+                               motivo, diagnostico, notas, mascota, vet);
+            }
+        }
+
+        // Modo NUEVA CITA
+        private void CrearNuevaCita(
+            string slotKey,
+            DateTime fecha,
+            DateTime fechaCita,
+            TimeSpan horaCita,
+            int idCliente,
+            int idMascota,
+            int idVeterinario,
+            string motivo,
+            string diagnostico,
+            string notas,
+            MascotaItem mascota,
+            VeterinarioItem vet)
+        {
+            // Marcar el slot como ocupado
             horaTurno[slotKey] = false;
 
             using (MySqlConnection con = new MySqlConnection(cadenaConexion))
@@ -441,7 +726,7 @@ namespace Clave1_Grupo1
 
                 try
                 {
-                    // 2) Guardar/actualizar JSON en 'horarios'
+                    // Guardar/actualizar JSON en 'horarios'
                     string jsonHorario = JsonConvert.SerializeObject(horaTurno);
 
                     if (horarioActualId.HasValue)
@@ -466,7 +751,7 @@ namespace Clave1_Grupo1
                         horarioActualId = (int)cmdH.LastInsertedId;
                     }
 
-                    // 3) Insertar la cita en la tabla 'citas'
+                    // Insertar la cita en la tabla 'citas'
                     string insertCita = @"
                         INSERT INTO citas
                         (fecha_cita, motivo, diagnostico, id_mascota, id_cliente, id_veterinario, estado, notas, hora_cita)
@@ -489,26 +774,24 @@ namespace Clave1_Grupo1
 
                     tx.Commit();
 
-                    // 4) Refrescar el DGV con los nuevos colores
                     LlenarDgvDesdeHoraTurno();
-
-                    // 5) Construir el diccionario para Form4
-                    var resumen = ConstruirDiccionarioResumenCita(
-                        fechaCita,
-                        horaCita,
-                        mascota,
-                        vet,
-                        motivo,
-                        notas,
-                        idCita
-                    );
+                    CargarCitasCliente();
 
                     MessageBox.Show("Cita agendada correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 6) Abrir Form4 con el diccionario
-                    Form4 f4 = new Form4(resumen);
-                    f4.ShowDialog();
+                    // Mostrar Form4 con detalle
+                    using (Form4 f4 = new Form4(idCita, true, _usuario))
+                    {
+                        f4.ShowDialog();
+                    }
+
+                    // Volver al tab de citas
+                    try
+                    {
+                        tabCitas.SelectedTab = tabPage2;
+                    }
+                    catch { }
                 }
                 catch (Exception ex)
                 {
@@ -519,43 +802,106 @@ namespace Clave1_Grupo1
             }
         }
 
-        // Construye el diccionario resumen para Form4
-        private Dictionary<string, string> ConstruirDiccionarioResumenCita(
+        // Modo EDITAR CITA
+        private void ActualizarCitaExistente(
+            string slotKey,
+            DateTime fecha,
             DateTime fechaCita,
             TimeSpan horaCita,
-            MascotaItem mascota,
-            VeterinarioItem vet,
+            int idCliente,
+            int idMascota,
+            int idVeterinario,
             string motivo,
-            string notas,
-            int idCita)
+            string diagnostico,
+            string notas)
         {
-            // Calcular edad de la mascota en años
-            int edad = DateTime.Today.Year - mascota.FechaNacimiento.Year;
-            if (mascota.FechaNacimiento.Date > DateTime.Today.AddYears(-edad))
-                edad--;
+            if (!_idCitaEdicion.HasValue)
+                return;
 
-            string nombreDueno = $"{_usuario["nombre"]} {_usuario["apellido"]}";
+            // Liberar el slot original y ocupar el nuevo
+            if (!string.IsNullOrEmpty(_slotOriginal) && horaTurno.ContainsKey(_slotOriginal))
+                horaTurno[_slotOriginal] = true;
 
-            var dict = new Dictionary<string, string>
+            horaTurno[slotKey] = false;
+
+            using (MySqlConnection con = new MySqlConnection(cadenaConexion))
             {
-                ["fecha"] = fechaCita.ToString("dd/MM/yyyy"),
-                ["hora"] = new DateTime(horaCita.Ticks).ToString("HH:mm"),
-                ["nombreMascota"] = mascota.Nombre,
-                ["especieMascota"] = mascota.Especie,
-                ["razaMazcota"] = mascota.Raza,
-                ["edadMascota"] = $"{edad} años",
-                ["sexoMascota"] = mascota.Sexo,
-                ["nombreDueno"] = nombreDueno,
-                ["correoDueno"] = _usuario["correo"],
-                ["telefono"] = _usuario["telefono"],
-                ["dirreccionDueno"] = _usuario["direccion"],
-                ["nombreVeterinario"] = vet.NombreCompleto,
-                ["MotivoCita"] = motivo,
-                ["notas"] = notas,
-                ["numeroCita"] = idCita.ToString()
-            };
+                con.Open();
+                MySqlTransaction tx = con.BeginTransaction();
 
-            return dict;
+                try
+                {
+                    string jsonHorario = JsonConvert.SerializeObject(horaTurno);
+
+                    if (horarioActualId.HasValue)
+                    {
+                        string updateHorario = @"UPDATE horarios
+                                                 SET horario = @horario
+                                                 WHERE id_horario = @idHorario";
+                        MySqlCommand cmdH = new MySqlCommand(updateHorario, con, tx);
+                        cmdH.Parameters.AddWithValue("@horario", jsonHorario);
+                        cmdH.Parameters.AddWithValue("@idHorario", horarioActualId.Value);
+                        cmdH.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        string insertHorario = @"INSERT INTO horarios (fecha, id_veterinario, horario)
+                                                 VALUES (@fecha, @idVet, @horario)";
+                        MySqlCommand cmdH = new MySqlCommand(insertHorario, con, tx);
+                        cmdH.Parameters.AddWithValue("@fecha", fecha);
+                        cmdH.Parameters.AddWithValue("@idVet", idVeterinario);
+                        cmdH.Parameters.AddWithValue("@horario", jsonHorario);
+                        cmdH.ExecuteNonQuery();
+                        horarioActualId = (int)cmdH.LastInsertedId;
+                    }
+
+                    string updateCita = @"
+                        UPDATE citas
+                        SET fecha_cita = @fecha_cita,
+                            motivo = @motivo,
+                            diagnostico = @diagnostico,
+                            id_mascota = @id_mascota,
+                            id_cliente = @id_cliente,
+                            id_veterinario = @id_veterinario,
+                            notas = @notas,
+                            hora_cita = @hora_cita
+                        WHERE id_cita = @id_cita;";
+
+                    MySqlCommand cmdC = new MySqlCommand(updateCita, con, tx);
+                    cmdC.Parameters.AddWithValue("@fecha_cita", fechaCita);
+                    cmdC.Parameters.AddWithValue("@motivo", motivo);
+                    cmdC.Parameters.AddWithValue("@diagnostico", diagnostico);
+                    cmdC.Parameters.AddWithValue("@id_mascota", idMascota);
+                    cmdC.Parameters.AddWithValue("@id_cliente", idCliente);
+                    cmdC.Parameters.AddWithValue("@id_veterinario", idVeterinario);
+                    cmdC.Parameters.AddWithValue("@notas", notas);
+                    cmdC.Parameters.AddWithValue("@hora_cita", horaCita);
+                    cmdC.Parameters.AddWithValue("@id_cita", _idCitaEdicion.Value);
+
+                    cmdC.ExecuteNonQuery();
+
+                    tx.Commit();
+
+                    LlenarDgvDesdeHoraTurno();
+                    CargarCitasCliente();
+
+                    MessageBox.Show("Cita modificada correctamente.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close(); // vuelve a Form4
+                }
+                catch (Exception ex)
+                {
+                    tx.Rollback();
+                    MessageBox.Show("Error al modificar la cita:\n\n" + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
