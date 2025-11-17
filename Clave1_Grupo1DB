@@ -1,0 +1,234 @@
+-- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+--
+-- Host: localhost    Database: veterinariapatitasypelos
+-- ------------------------------------------------------
+-- Server version	8.0.44
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `administradores`
+--
+
+DROP TABLE IF EXISTS `administradores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `administradores` (
+  `id_administrador` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  PRIMARY KEY (`id_administrador`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `administradores_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administradores`
+--
+
+LOCK TABLES `administradores` WRITE;
+/*!40000 ALTER TABLE `administradores` DISABLE KEYS */;
+INSERT INTO `administradores` VALUES (1,1),(2,6),(3,18),(4,19),(5,20),(6,21),(7,22),(8,23),(9,24),(10,25);
+/*!40000 ALTER TABLE `administradores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `citas`
+--
+
+DROP TABLE IF EXISTS `citas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `citas` (
+  `id_cita` int NOT NULL AUTO_INCREMENT,
+  `fecha_cita` datetime NOT NULL,
+  `motivo` varchar(255) DEFAULT NULL,
+  `diagnostico` text,
+  `id_mascota` int NOT NULL,
+  `id_cliente` int NOT NULL,
+  `id_veterinario` int DEFAULT NULL,
+  `estado` varchar(20) NOT NULL DEFAULT 'Proxima',
+  `notas` text,
+  `hora_cita` time NOT NULL DEFAULT '00:00:00',
+  PRIMARY KEY (`id_cita`),
+  KEY `id_mascota` (`id_mascota`),
+  KEY `id_cliente` (`id_cliente`),
+  KEY `fk_citas_veterinario` (`id_veterinario`),
+  CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`id_mascota`) REFERENCES `mascotas` (`id_mascota`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_citas_veterinario` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`),
+  CONSTRAINT `CHK_citas_estado` CHECK ((`estado` in (_utf8mb4'Proxima',_utf8mb4'Pasada',_utf8mb4'Cancelada')))
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `citas`
+--
+
+LOCK TABLES `citas` WRITE;
+/*!40000 ALTER TABLE `citas` DISABLE KEYS */;
+INSERT INTO `citas` VALUES (1,'2025-11-14 08:00:00','Esterilización','Esterilización',1,3,1,'proxima','-','08:00:00'),(2,'2025-11-14 13:30:00','Medicina general','Chequeo general trimestral',1,3,1,'proxima','-','13:30:00'),(3,'2025-11-14 09:00:00','Dermatología','Piel irritada por sensibilidad',3,3,1,'proxima','-','09:00:00'),(4,'2025-11-14 09:30:00','Cirugía dental','Extraccion de colmillo',2,3,1,'proxima','-','09:30:00'),(5,'2025-11-14 11:00:00','Otro','chequeo general',1,3,1,'proxima','-','11:00:00'),(6,'2025-11-14 15:30:00','Otro','Otro',3,3,1,'proxima','-','15:30:00'),(7,'2025-11-14 16:00:00','Otro','Otro',2,3,1,'proxima','-','16:00:00'),(8,'2025-11-15 09:00:00','Otro','Otro',1,3,1,'proxima','-','09:00:00'),(9,'2025-12-10 14:30:00','Dermatología','Sensivilidad dermatologica.',4,4,1,'proxima','Posible revision ortopedica.','14:30:00'),(10,'2025-11-22 10:00:00','Esterilización','Esterilizacion regular.',4,4,1,'proxima','Se receta medicamento.','10:00:00'),(11,'2025-12-05 14:00:00','Cirugía General','Lesion en la piel.',4,4,1,'cancelada','Se reseta medicamento.','14:00:00'),(12,'2025-11-19 08:00:00','Otro','Otro',4,4,1,'proxima','','08:00:00'),(13,'2025-11-27 09:30:00','Cirugía dental, Dermatología','Piel sensible',4,4,1,'proxima','-','09:30:00'),(14,'2025-11-22 08:00:00','Medicina general','Chequeo general',5,4,2,'proxima','','08:00:00'),(15,'2026-01-03 13:00:00','Cirugía dental','Extraccion de molar',6,5,1,'cancelada','','13:00:00'),(16,'2026-01-12 13:30:00','Cirugía dental','Extraccion de diente',7,1,1,'cancelada','Posible revision dermatologica','13:30:00'),(17,'2026-01-15 10:00:00','Dermatología','Piel sensible',8,1,1,'cancelada','Posible sirugia dental','10:00:00'),(18,'2026-01-08 09:00:00','Dermatología','Piel sensible',9,2,5,'cancelada','Posible cirugia dental','09:00:00');
+/*!40000 ALTER TABLE `citas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clientes` (
+  `id_cliente` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  PRIMARY KEY (`id_cliente`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clientes`
+--
+
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,3),(2,4),(3,5),(4,8),(5,9),(6,26),(7,27),(8,28),(9,29),(10,30);
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `horarios`
+--
+
+DROP TABLE IF EXISTS `horarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `horarios` (
+  `id_horario` int NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `id_veterinario` int DEFAULT NULL,
+  `horario` json DEFAULT NULL,
+  PRIMARY KEY (`id_horario`),
+  KEY `fk_horarios_veterinarios` (`id_veterinario`),
+  CONSTRAINT `fk_horarios_veterinarios` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinarios` (`id_veterinario`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `horarios`
+--
+
+LOCK TABLES `horarios` WRITE;
+/*!40000 ALTER TABLE `horarios` DISABLE KEYS */;
+INSERT INTO `horarios` VALUES (1,'2025-11-14',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": false, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": false, \"4:00:00 PM - 4:30:00 PM\": false, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": false, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": false, \"9:30:00 AM - 10:00:00 AM\": false, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": false, \"11:30:00 AM - 12:00:00 PM\": true}'),(2,'2025-11-15',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": false, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(3,'2025-11-22',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": false, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": false, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(4,'2025-12-05',2,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": false, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(5,'2025-12-05',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(6,'2025-11-19',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": false, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(7,'2025-11-28',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": false, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(8,'2025-11-22',2,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": false, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(9,'2025-11-27',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": false, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(10,'2025-12-10',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": false, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(11,'2026-01-01',2,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": false, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(12,'2026-01-03',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(13,'2026-01-12',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(14,'2025-12-02',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": false, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(15,'2026-01-15',1,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(16,'2025-12-18',5,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": false, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}'),(17,'2026-01-08',5,'{\"1:00:00 PM - 1:30:00 PM\": true, \"1:30:00 PM - 2:00:00 PM\": true, \"2:00:00 PM - 2:30:00 PM\": true, \"2:30:00 PM - 3:00:00 PM\": true, \"3:00:00 PM - 3:30:00 PM\": true, \"3:30:00 PM - 4:00:00 PM\": true, \"4:00:00 PM - 4:30:00 PM\": true, \"4:30:00 PM - 5:00:00 PM\": true, \"8:00:00 AM - 8:30:00 AM\": true, \"8:30:00 AM - 9:00:00 AM\": true, \"9:00:00 AM - 9:30:00 AM\": true, \"9:30:00 AM - 10:00:00 AM\": true, \"10:00:00 AM - 10:30:00 AM\": true, \"10:30:00 AM - 11:00:00 AM\": true, \"11:00:00 AM - 11:30:00 AM\": true, \"11:30:00 AM - 12:00:00 PM\": true}');
+/*!40000 ALTER TABLE `horarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mascotas`
+--
+
+DROP TABLE IF EXISTS `mascotas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mascotas` (
+  `id_mascota` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `especie` varchar(50) DEFAULT NULL,
+  `raza` varchar(50) DEFAULT NULL,
+  `sexo` enum('Macho','Hembra') DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `id_cliente` int NOT NULL,
+  PRIMARY KEY (`id_mascota`),
+  KEY `id_cliente` (`id_cliente`),
+  CONSTRAINT `mascotas_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mascotas`
+--
+
+LOCK TABLES `mascotas` WRITE;
+/*!40000 ALTER TABLE `mascotas` DISABLE KEYS */;
+INSERT INTO `mascotas` VALUES (1,'Spanky','Perro','Pitbull','Hembra','2020-11-14',3),(2,'Nieve','Gato','Persa','Hembra','2024-02-02',3),(3,'Doky','Perro','Chihuahua','Macho','2025-09-09',3),(4,'Loky','Perro','Pastor Aleman','Macho','2024-10-09',4),(5,'Choper','Perro','Huskey','Macho','2024-02-06',4),(6,'Tedy','Gato','Persa','Hembra','2026-01-13',5),(7,'Roky','Perro','Pastor Aleman','Macho','2024-06-12',1),(8,'Choper','Perro','Pastor Aleman','Macho','2023-02-28',1),(9,'Rocky','Perro','Huskey','Macho','2023-06-06',2),(10,'Puchi','Conejo','silvestre','Macho','2024-11-28',6);
+/*!40000 ALTER TABLE `mascotas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `correo_electronico` varchar(150) NOT NULL,
+  `contrasena` varchar(100) NOT NULL,
+  `numero_telefonico` varchar(20) DEFAULT NULL,
+  `direccion` varchar(200) DEFAULT NULL,
+  `rol` enum('Cliente','Veterinario','Administrador') NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `correo_electronico` (`correo_electronico`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Jaime','Aldana','jaime@aldana.com','1234','45784578','San Salvador','Administrador'),(2,'Alicia','Rivas','alicia@rivas.com','4321','457845784578','San Miguel','Veterinario'),(3,'Marcos','Cisneros','marcos@cisneros.com','9876','12345678','La Libertad','Cliente'),(4,'Maria','Gimenez','maria@gimenez.com','9878','72399079','San Salvador','Cliente'),(5,'Dinora','Beltran','dinora@beltran.com','123456','12457889','Texas','Cliente'),(6,'Eriksson Josue','Hernandez Larin','eriksson@hernandez.com','4321','78294072','San Salvador','Administrador'),(7,'Camila Abigail','Gonzalez Figueroa','camila@gonzalez.com','1234','23457298','Santa Ana','Veterinario'),(8,'Melissa Lizeth','Gonzalez Rivera','melissa@gonzalez.com','2244','56234578','La Union','Cliente'),(9,'Julio','Martinez','julio@martinez.com','12345','22222222','San Miguel','Cliente'),(10,'Otoniel','Martinez','otoniel@martinez','7890','222-2222','San Salvador','Veterinario'),(11,'Maria','Ortiz','maria@ortiz.com','4321','2222-3333','La Libertad','Veterinario'),(12,'Jorge','Ramirez','jorge@ramirez.com','4321','3333--4444','San Salvador','Veterinario'),(13,'Gilberto','Ulloa','gilberto@ulloa.com','GU0045','78451278','Usulutan','Veterinario'),(14,'Mauricio','Miranda','mauricio@miranda.com','MM4512','89562389','La Paz','Veterinario'),(15,'Elva','Hernandez','elva@hernandez,com','4556','56238978','San Miguel','Veterinario'),(16,'Ernesto','Funes','ernesto@funes.com','7856','56238912','Cabañas','Veterinario'),(17,'Edit','Cruz','edit@cruz.com','7889','23564512','Chalatenango','Veterinario'),(18,'Armando','Linares','armando@linares.com','5645','45895623','Sonsonate','Administrador'),(19,'Camila','Lourdes','camila@lourdes.com','8956','98653287','San Vicente','Administrador'),(20,'Antonio','Loera','antonio@loera.com','AL5623','21548732','Cuscatlan','Administrador'),(21,'Ana','Ortiz','ana@ortiz.com','AO5623','65329854','Cabañas','Administrador'),(22,'Alberto','Granados','alberto@granados.com','2356AG','87655432','La Libertad','Administrador'),(23,'Carlos','Siguenza','carlos@soguenza.com','CA5623','4842953565','Ahuachapan','Administrador'),(24,'Pablo','Gabidia','pablo@gabidia.com','EE91627583','76184359','San Salvador','Administrador'),(25,'Juana','de Arco','juana@dearco.com','JDA648513','6713985247','Ahuachapan','Administrador'),(26,'Arturo','Romero','arturo@romero.com','AR4512','61976145','La Libertad','Cliente'),(27,'Estefany','Madrid','estefany@madrid.com','EM1245','34965873','Chalatenango','Cliente'),(28,'Karla','Girola','karla@girola.com','KG56759','489657852','La Libertad','Cliente'),(29,'Patricia','Lopez','patricia@lopez.com','PL654789','314796556','La Paz','Cliente'),(30,'Himelda','Sanchez','himelda@sanchez.com','HS68745','425896321','Cabañas','Cliente');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `veterinarios`
+--
+
+DROP TABLE IF EXISTS `veterinarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `veterinarios` (
+  `id_veterinario` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  PRIMARY KEY (`id_veterinario`),
+  KEY `id_usuario` (`id_usuario`),
+  CONSTRAINT `veterinarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `veterinarios`
+--
+
+LOCK TABLES `veterinarios` WRITE;
+/*!40000 ALTER TABLE `veterinarios` DISABLE KEYS */;
+INSERT INTO `veterinarios` VALUES (1,2),(2,7),(3,10),(4,11),(5,12),(6,13),(7,14),(8,15),(9,16),(10,17);
+/*!40000 ALTER TABLE `veterinarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-11-16 21:33:53
